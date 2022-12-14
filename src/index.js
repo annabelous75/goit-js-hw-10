@@ -22,9 +22,13 @@ function onInputChange(e) {
   fetchCountries(valueofInput)
     .then(onRenderCountries)
     .catch(Notiflix.Notify.failure('Oops, there is no country with that name'));
-  refs.countrylist.innerHTML = '';
-  refs.countryinfo.innerHTML = '';
-  return;
+
+  if (!valueofInput) {
+    refs.countrylist.innerHTML = '';
+    refs.countryinfo.innerHTML = '';
+    return;
+  }
+  refs.input.removeEventListener('input', e);
 }
 
 function onRenderCountries(countries) {
